@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jay Kim | Portfolio</title>
+    <style>
+        /* --- Base & Reset Rules --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* --- Twinkling Star Background (Kingdom Hearts Menu Vibe) --- */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                radial-gradient(1px 1px at 10% 20%, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 25% 40%, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 45% 15%, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 70% 35%, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 85% 70%, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 30% 80%, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 60% 85%, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 90% 20%, #ffffff, rgba(0,0,0,0));
+            background-size: 100% 100%;
+            animation: twinkle 6s infinite ease-in-out alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.4; }
+            50% { opacity: 0.9; }
+            100% { opacity: 0.5; }
+        }
+
+        /* --- Layout Container --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* --- Structural Sections --- */
+        header {
+            margin-bottom: 80px;
+            margin-top: 40px;
+        }
+
+        section {
+            margin-bottom: 90px;
+        }
+
+        /* --- Typography & Elements --- */
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 1.15rem;
+            color: #a0a0a0;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            color: #888888;
+            border-bottom: 1px solid #222222;
+            padding-bottom: 10px;
+        }
+
+        .about-text {
+            font-size: 1.25rem;
+            max-width: 800px;
+            color: #e0e0e0;
+            font-weight: 300;
+        }
+
+        /* --- Asset Grid Layout --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background-color: #080808;
+            border: 1px solid #1a1a1a;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: border-color 0.25s ease, transform 0.25s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            border-color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .image-container {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background-color: #111111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            position: relative;
+        }
+
+        /* Pixel art specific optimization rendering */
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+
+        /* Target the wide panoramic layout specifically */
+        .image-container.wide-layout img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        .card-meta {
+            padding: 15px;
+            border-top: 1px solid #1a1a1a;
+            background-color: #050505;
+        }
+
+        .card-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+        }
+
+        /* --- Contact Links --- */
+        .contact-links {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color 0.2s ease;
+        }
+
+        .contact-links a::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: #ffffff;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+
+        .contact-links a:hover {
+            color: #a0a0a0;
+        }
+
+        .contact-links a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* --- Responsive Queries --- */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .subtitle {
+                font-size: 1rem;
+            }
+            .about-text {
+                font-size: 1.1rem;
+            }
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header>
+            <h1>Jay Kim</h1>
+            <div class="subtitle">Emerging Media Technology @ NYCCT | Game Developer & Asset Designer</div>
+        </header>
+
+        <section id="about">
+            <h2 class="section-title">About</h2>
+            <p class="about-text">
+                Specializing in designing highly optimized game assets and building immersive, interactive environments. Driven by production workflows that merge functional performance with compelling artistic styles across creative gaming frameworks.
+            </p>
+        </section>
+
+        <section id="assets">
+            <h2 class="section-title">Asset Showcase</h2>
+            <div class="grid">
+                
+                <div class="card">
+                    <div class="image-container">
+                        <img src="ANormalKey.png" alt="ANormalKey Asset">
+                    </div>
+                    <div class="card-meta">
+                        <div class="card-title">ANormalKey.png</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="image-container">
+                        <img src="Dumbell.png" alt="Dumbell Asset">
+                    </div>
+                    <div class="card-meta">
+                        <div class="card-title">Dumbell.png</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="image-container">
+                        <img src="fire place (fire)-export.gif" alt="Fire Place (Fire) Animation">
+                    </div>
+                    <div class="card-meta">
+                        <div class="card-title">fire place (fire)-export.gif</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="image-container">
+                        <img src="FirePlace.png" alt="Fire Place Base Asset">
+                    </div>
+                    <div class="card-meta">
+                        <div class="card-title">FirePlace.png</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="image-container">
+                        <img src="Kanade (W.I.png" alt="Kanade Sprite Asset">
+                    </div>
+                    <div class="card-meta">
+                        <div class="card-title">Kanade (W.I.png</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="image-container">
+                        <img src="Karats.png" alt="Karats Asset">
+                    </div>
+                    <div class="card-meta">
+                        <div class="card-title">Karats.png</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="image-container wide-layout">
+                        <img src="Menu.png" alt="Menu Interface Asset">
+                    </div>
+                    <div class="card-meta">
+                        <div class="card-title">Menu.png</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="image-container">
+                        <img src="Parfait.png" alt="Parfait Asset">
+                    </div>
+                    <div class="card-meta">
+                        <div class="card-title">Parfait.png</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="image-container">
+                        <img src="Pawn Chess piece.gif" alt="Pawn Chess Piece Animation">
+                    </div>
+                    <div class="card-meta">
+                        <div class="card-title">Pawn Chess piece.gif</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="image-container">
+                        <img src="Pawn Chess piece.png" alt="Pawn Chess Pieces Sheet">
+                    </div>
+                    <div class="card-meta">
+                        <div class="card-title">Pawn Chess piece.png</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-links">
+                <a href="mailto:jay.kim@example.com">Email</a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="#" onclick="return false;">Portfolio</a>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>
